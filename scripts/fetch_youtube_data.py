@@ -81,6 +81,10 @@ if __name__ == "__main__":
     # Convert dates
     df["published_at"] = pd.to_datetime(df["published_at"])
 
-    df.to_csv("youtube_videos.csv", index=False)
-    print("Saved youtube_videos.csv successfully!")
+    import os
+    output_dir = os.path.join(os.path.dirname(__file__), "..", "data", "seed")
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "youtube_videos.csv")
+    df.to_csv(output_path, index=False)
+    print(f"Saved {output_path} successfully!")
     print("Total videos fetched:", len(df))
